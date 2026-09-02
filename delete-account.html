@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Your SolarBESS Account</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+  :root{--primary:#0a0f1e;--surface:#131929;--card:#1a2236;--border:#243050;--accent:#f5a623;--text:#e2e8f0;--text-dim:#94a3b8;--red:#ef4444;--red-dim:rgba(239,68,68,0.1);--red-border:rgba(239,68,68,0.35);}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--primary);color:var(--text);font-family:'DM Sans',-apple-system,Segoe UI,Roboto,sans-serif;padding:24px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:32px 28px;max-width:420px;width:100%;}
+  h1{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;margin:0 0 8px;}
+  p{color:var(--text-dim);font-size:0.92rem;line-height:1.55;margin:0 0 18px;}
+  input{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-size:0.92rem;margin-bottom:12px;box-sizing:border-box;}
+  input:focus{outline:none;border-color:var(--accent);}
+  button{width:100%;padding:12px 20px;border:none;border-radius:8px;font-weight:700;font-size:0.92rem;cursor:pointer;}
+  .btn-primary{background:var(--accent);color:#0a0f1e;}
+  .btn-danger{background:var(--red-dim);border:1px solid var(--red-border);color:var(--red);}
+  .status{font-size:0.84rem;margin-top:12px;min-height:1.2em;}
+  .status.error{color:var(--red);}
+  .status.ok{color:#22c55e;}
+  .email-chip{font-family:monospace;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:2px 8px;color:var(--accent);}
+  #step-confirm{display:none;}
+  footer{max-width:420px;margin:16px auto 0;text-align:center;font-size:0.76rem;color:var(--text-dim);}
+  footer a{color:var(--accent);}
+</style>
+</head>
+<body>
+  <div>
+  <div class="card">
+    <div id="step-request">
+      <h1>Delete Your Account</h1>
+      <p>Enter the email address on your SolarBESS Sizing Studio account. We'll send a link to confirm you own it before anything is deleted.</p>
+      <input type="email" id="email-input" placeholder="you@example.com" autocomplete="email">
+      <button class="btn-primary" id="send-btn">Send Confirmation Link</button>
+      <div class="status" id="request-status"></div>
+    </div>
+    <div id="step-confirm">
+      <h1>Confirm Deletion</h1>
+      <p>You're verified as <span class="email-chip" id="confirm-email"></span>. This permanently deletes your account, subscription record, and saved data. This cannot be undone.</p>
+      <button class="btn-danger" id="confirm-btn">Permanently Delete My Account</button>
+      <div class="status" id="confirm-status"></div>
+    </div>
+  </div>
+  <footer>Trouble with this page? Email <a href="mailto:nextritechltd@gmail.com?subject=SolarBESS%20account%20deletion%20request">nextritechltd@gmail.com</a> with your account email and we'll delete it for you.</footer>
+  </div>
+<script>
+  const supabaseClient = supabase.createClient('https://ejltimmzynxncvnfgits.supabase.co', 'sb_publishable_y_oomCTe8gEAtF-wlxDpwg_jycUs5lH');
+  const deleteAccountUrl = 'https://ejltimmzynxncvnfgits.supabase.co/functions/v1/delete-account';
+  const stepRequest = document.getElementById('step-request');
+  const stepConfirm = document.getElementById('step-confirm');
+
+  async function checkForSession() {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (session) {
+      stepRequest.style.display = 'none';
+      stepConfirm.style.display = 'block';
+      document.getElementById('confirm-email').textContent = session.user.email;
+      return session;
+    }
+    return null;
+  }
+
+  document.getElementById('send-btn').addEventListener('click', async () => {
+    const email = document.getElementById('email-input').value.trim();
+    const statusEl = document.getElementById('request-status');
+    if (!email) { statusEl.textContent = 'Enter an email address.'; statusEl.className = 'status error'; return; }
+    statusEl.textContent = 'Sending...'; statusEl.className = 'status';
+    const { error } = await supabaseClient.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: window.location.href },
+    });
+    if (error) { statusEl.textContent = error.message; statusEl.className = 'status error'; return; }
+    statusEl.textContent = 'Check your email for a confirmation link. If an account exists for that address, a link is on its way.';
+    statusEl.className = 'status ok';
+  });
+
+  document.getElementById('confirm-btn').addEventListener('click', async () => {
+    const statusEl = document.getElementById('confirm-status');
+    const btn = document.getElementById('confirm-btn');
+    btn.disabled = true;
+    statusEl.textContent = 'Deleting...'; statusEl.className = 'status';
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) { statusEl.textContent = 'Session expired — request a new link.'; statusEl.className = 'status error'; btn.disabled = false; return; }
+    try {
+      const res = await fetch(deleteAccountUrl, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + session.access_token, 'apikey': 'sb_publishable_y_oomCTe8gEAtF-wlxDpwg_jycUs5lH' },
+      });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error || 'Deletion failed');
+      statusEl.textContent = 'Your account has been deleted.'; statusEl.className = 'status ok';
+      document.getElementById('confirm-btn').style.display = 'none';
+    } catch (e) {
+      statusEl.textContent = e.message; statusEl.className = 'status error'; btn.disabled = false;
+    }
+  });
+
+  checkForSession();
+</script>
+</body>
+</html>
