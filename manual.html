@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Manual — SolarBESS Sizing Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4; --surface:#ffffff; --card:#f8f6f1; --border:#e5ddd0;
+  --ink:#1e1a14; --ink-dim:#6b6255; --ink-faint:#9a8f7d;
+  --accent:#b8720f; --accent-soft:#fdf1de; --accent-border:#eecd9a;
+  --warn:#9a4a12; --warn-soft:#fdeee0; --warn-border:#f0c194;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0a0f1e; --surface:#131929; --card:#1a2236; --border:#243050;
+    --ink:#e2e8f0; --ink-dim:#94a3b8; --ink-faint:#64748b;
+    --accent:#f5a623; --accent-soft:rgba(245,166,35,0.12); --accent-border:rgba(245,166,35,0.35);
+    --warn:#f5a623; --warn-soft:rgba(245,166,35,0.1); --warn-border:rgba(245,166,35,0.3);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;}
+a{color:var(--accent);text-decoration-thickness:1px;}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10;}
+.brand{display:flex;align-items:center;gap:9px;}
+.brand-mark{width:24px;height:24px;flex-shrink:0;}
+.brand-name{font-family:'Syne',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:-0.2px;}
+.brand-name span{color:var(--accent);}
+.doc-pill{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--border);border-radius:100px;padding:4px 10px;}
+main{max-width:700px;margin:0 auto;padding:48px 24px 100px;}
+.doc-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.7rem,5vw,2.3rem);letter-spacing:-0.5px;margin:0 0 12px;text-wrap:balance;}
+.sub{color:var(--ink-dim);font-size:0.98rem;line-height:1.65;margin:0 0 20px;max-width:56ch;}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-family:'DM Mono',monospace;font-size:0.74rem;color:var(--ink-faint);margin-bottom:36px;padding-bottom:26px;border-bottom:1px solid var(--border);}
+.meta b{color:var(--ink-dim);font-weight:500;}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:40px;}
+.toc-label{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
+.toc ol{margin:0;padding:0 0 0 1.3em;columns:2;column-gap:20px;}
+.toc li{font-size:0.84rem;line-height:1.9;}
+.toc a{color:var(--ink-dim);text-decoration:none;}
+.toc a:hover{color:var(--accent);}
+section{margin-bottom:34px;scroll-margin-top:70px;}
+h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.12rem;letter-spacing:-0.2px;display:flex;gap:10px;align-items:baseline;margin:0 0 12px;}
+h2 .num{font-family:'DM Mono',monospace;font-size:0.84rem;font-weight:500;color:var(--accent);flex-shrink:0;}
+p{line-height:1.75;font-size:0.94rem;margin:0 0 13px;}
+p.dim{color:var(--ink-dim);}
+ul{padding-left:1.3em;line-height:1.75;font-size:0.94rem;margin:0 0 13px;}
+li{margin-bottom:7px;}
+strong{color:var(--ink);font-weight:700;}
+code{font-family:'DM Mono',monospace;font-size:0.85em;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1px 5px;}
+.prominent{background:var(--warn-soft);border:1px solid var(--warn-border);border-radius:12px;padding:16px 18px;margin:0 0 16px;}
+.prominent p{margin:0;font-weight:600;color:var(--warn);line-height:1.65;}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:34px;scroll-margin-top:70px;}
+.step-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.step-num{font-family:'Syne',sans-serif;font-weight:800;font-size:0.78rem;color:#1a1305;background:var(--accent);width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-card h2{margin:0;font-size:1.05rem;}
+.tip{display:flex;gap:8px;background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:8px;padding:10px 14px;font-size:0.85rem;margin-top:10px;color:var(--ink-dim);line-height:1.6;}
+.tip b{color:var(--accent);flex-shrink:0;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:6px 0 24px;}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.feat h3{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;margin:0 0 6px;color:var(--ink);}
+.feat p{font-size:0.82rem;color:var(--ink-dim);line-height:1.6;margin:0;}
+.foot-note{margin-top:44px;padding:16px 18px;background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:12px;font-size:0.82rem;color:var(--ink-dim);line-height:1.65;}
+footer{max-width:700px;margin:0 auto;padding:0 24px 56px;font-size:0.78rem;color:var(--ink-faint);line-height:1.6;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+@media (max-width:520px){ .toc ol{columns:1;} .meta{gap:10px 18px;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    <div class="brand-name">SolarBESS <span>Sizing Studio</span></div>
+  </div>
+  <div class="doc-pill">Guide · User Manual</div>
+</div>
+
+<main>
+  <div class="doc-eyebrow">Guide</div>
+  <h1>User Manual</h1>
+  <p class="sub">A walkthrough of every tab in SolarBESS Sizing Studio, from sign-in to a finished, exportable proposal.</p>
+  <div class="meta"><span><b>Format</b> Reference guide</span><span><b>Language</b> English</span><span><b>Also in-app</b> Spanish, Portuguese, French</span></div>
+
+  <div class="toc">
+    <div class="toc-label">On this page</div>
+    <ol>
+      <li><a href="#m-overview">Overview</a></li>
+      <li><a href="#m-begin">Before You Begin</a></li>
+      <li><a href="#m-step1">1. Project Info</a></li>
+      <li><a href="#m-step2">2. Loads</a></li>
+      <li><a href="#m-step3">3. Site Data</a></li>
+      <li><a href="#m-step4">4. Design Preferences</a></li>
+      <li><a href="#m-step5">5. Results</a></li>
+      <li><a href="#m-step6">6. Bill of Quantities</a></li>
+      <li><a href="#m-step7">7. Financials</a></li>
+      <li><a href="#m-step8">8. Export</a></li>
+      <li><a href="#m-step9">9. Documents</a></li>
+      <li><a href="#m-designs">The Designs Button</a></li>
+      <li><a href="#m-pricing">The Pricing Section</a></li>
+      <li><a href="#m-features">Other Features</a></li>
+      <li><a href="#m-gloss1">Glossary: Solar &amp; Battery Basics</a></li>
+      <li><a href="#m-gloss2">Glossary: Design Parameters</a></li>
+      <li><a href="#m-gloss3">Glossary: Tariff Terms</a></li>
+      <li><a href="#m-gloss4">Glossary: Financial Terms</a></li>
+      <li><a href="#m-trouble">Troubleshooting</a></li>
+    </ol>
+  </div>
+
+  <section class="clause" id="m-overview"><h2>Overview</h2>
+  <p>SolarBESS Sizing Studio takes you through nine tabs — Project, Loads, Site, Design, Results, BOQ, Financials, Export, and Documents — to turn a client's power needs into a fully priced, print-ready proposal. You can jump between tabs at any time using the tab bar at the top; each tab remembers what you've entered.</p></section>
+
+  <section class="clause" id="m-begin"><h2>Before You Begin: Sign In &amp; Trial</h2>
+  <p>Sign in with a Google account to start a free 3-day trial (once per account — re-signing in with the same account after deleting it won't grant a second trial). The trial includes full design access, plus up to <strong>3 free exports of each report action</strong> (print or save, for each of the Technical Proposal, BOQ, and Financial Report) — after those are used, that specific action needs a subscription, though you can still view every calculated value on-screen. After the trial, a subscription (monthly or annual) is required to continue at all. Your account, licence status, and preferred language are shown in the header — tap ⚙ next to your name to manage your subscription on Google Play, or to delete your account.</p></section>
+
+  <div class="step-card" id="m-step1"><div class="step-head"><div class="step-num">1</div><h2>Project Info</h2></div>
+  <p>Enter the project name, client location, and market/country — this sets the currency, VAT rules, and regulatory content (net-metering caps, licensing notes) used throughout the rest of the design. Your company name, tagline, address, and phone number are entered once here and remembered automatically for every future design, so you won't need to re-type them.</p>
+  <div class="tip"><b>Tip:</b> the market/country selector drives a lot — tariff hints, cable standards, and equipment approval notes are all pulled from the selected market's regulatory pack.</div></div>
+
+  <div class="step-card" id="m-step2"><div class="step-head"><div class="step-num">2</div><h2>Loads</h2></div>
+  <p>Build the appliance list — name, phase, wattage, quantity, hours/day, and whether each load is <strong>Critical</strong> (backed by the battery during an outage) or not. Load a Residential or Commercial template to start from a realistic default list, then adjust. The Load Summary card totals daily energy, critical energy, and peak demand live as you edit.</p>
+  <div class="tip"><b>Tip:</b> only mark a load Critical if it should actually be sized into the battery backup — marking everything critical inflates the battery bank (and its cost) for loads that don't need outage protection.</div></div>
+
+  <div class="step-card" id="m-step3"><div class="step-head"><div class="step-num">3</div><h2>Site Data</h2></div>
+  <p>Peak sun hours, tilt, orientation, shading, ambient/cold temperature, altitude, and mounting type. These feed directly into panel derating and cable sizing — for a battery-only (BESS) system, this tab can be skipped entirely.</p></div>
+
+  <div class="step-card" id="m-step4"><div class="step-head"><div class="step-num">4</div><h2>Design Preferences</h2></div>
+  <p>Panel wattage, battery unit size, battery chemistry, autonomy target, inverter strategy, and cable run lengths (DC string, DC main, AC, battery). Entering your actual measured cable distances here — rather than leaving them on "auto" — is what makes the Bill of Quantities' cable-length lines match the real site instead of falling back to generic defaults.</p>
+  <p>Panel wattage and battery unit size each offer <strong>🤖 Auto-Select</strong> (picks the best cost-effective option automatically from what's available for the current market and your uploaded equipment), <strong>📋 Browse Available</strong> (opens a list of real products — name, spec, and localized price — to pick a specific one), and a manual/custom entry for anything not listed.</p>
+  <div class="tip"><b>Tip:</b> the <strong>Equipment Source</strong> setting at the top of this tab (Built-in Catalogue / My Equipment / Both) controls what Auto-Select and Browse draw from — "Both" is the default and gives the widest choice once you've uploaded your own price list under Pricing → Bulk Import.</div></div>
+
+  <div class="step-card" id="m-step5"><div class="step-head"><div class="step-num">5</div><h2>Results</h2></div>
+  <p>Click <strong>Run Design Engine</strong> to size the PV array, inverter, and battery bank against five independent engineering constraints (energy autonomy, inverter discharge/charge limits, PV charge rate, DC voltage window) — the constraint requiring the most battery units wins and sets the final bank size. The single-line diagram and battery topology diagram update automatically.</p></div>
+
+  <div class="step-card" id="m-step6"><div class="step-head"><div class="step-num">6</div><h2>Bill of Quantities</h2></div>
+  <p>Every line item the design requires, priced and totaled with your configured margin, labor fee, design fee, and VAT. You can edit any line's unit cost directly, toggle its VAT status, remove a line, or add a custom one — the BOQ remembers your edits and stops auto-rebuilding once you've touched it, so a later report or a revisit to this tab won't silently overwrite what you changed. Use <strong>↺ Regenerate BOQ</strong> if you ever want a clean rebuild from the current design instead.</p>
+  <div class="tip"><b>Tip:</b> the "Overall Margin" field (Financial Parameters, above the BOQ) is stacked on top of every item's cost — a small change there moves every total in the document at once.</div></div>
+
+  <div class="step-card" id="m-step7"><div class="step-head"><div class="step-num">7</div><h2>Financials</h2></div>
+  <p>Annual savings, simple payback, 25-year NPV, IRR, and CO₂ offset — all derived from your BOQ total, the market's tariff, and the WACC/escalation assumptions you set here. NPV discounts each of the next 25 years' savings back to today's value at your WACC; a lower WACC narrows the gap between NPV and raw cumulative savings.</p></div>
+
+  <div class="step-card" id="m-step8"><div class="step-head"><div class="step-num">8</div><h2>Export</h2></div>
+  <p>Print or save-and-share three documents as PDF: the full Technical Proposal, the BOQ/cost estimate alone, or the Financial Analysis report — each carries your company branding from the Project Info tab. Saved files land in <code>Downloads/Nextritech/SolarBESS Sizing Studio</code> and open straight to your device's share sheet. During the free trial, each of these six buttons (print/save × 3 report types) has its own 3-use allowance — see "Before You Begin" above.</p></div>
+
+  <div class="step-card" id="m-step9"><div class="step-head"><div class="step-num">9</div><h2>Documents</h2></div>
+  <p>This tab — the Terms &amp; Conditions (including the professional-judgment disclaimer that applies to every design), the Privacy Policy, and this User Manual, each with an <strong>Open</strong> button (reads it right here in the app) and a <strong>Download</strong> button (saves a standalone .html copy to <code>Downloads/Nextritech/SolarBESS Sizing Studio</code> that opens in any browser, no app required). All three are available in English, Spanish, Portuguese, and French, with a language tab at the top of the document itself.</p></div>
+
+  <section class="clause" id="m-designs"><h2>The "Designs" Button — Save, Load, Compare, Import &amp; Export</h2>
+  <p>The <strong>💾 Designs</strong> button in the header (available from any tab) opens the Saved Designs panel — this is how you manage multiple client projects without losing work, and how a design travels between your own devices or to a colleague.</p>
+  <ul>
+  <li><strong>💾 Save Current</strong> — stores everything about the design you're currently working on (all inputs, the calculated Results, and your BOQ including any manual edits) under its Project Name, so it doesn't get lost when you start a New Design or close the App.</li>
+  <li><strong>Load</strong> (next to any saved design in the list) — brings that design back exactly as it was saved, on the tab it was saved from.</li>
+  <li><strong>⧉ Copy (Duplicate)</strong> — makes an independent copy of a saved design under a new entry, useful for quoting two variants of the same job (e.g. with and without battery) without re-entering all the loads.</li>
+  <li><strong>✕ Delete</strong> — removes a saved design permanently. This only deletes the local saved copy, not your account.</li>
+  <li><strong>Compare</strong> — tick the checkbox on 2–3 saved designs to see them side-by-side (System Mode, PV Array, Inverter, Battery, Autonomy, Total Cost) — useful for showing a client a budget-vs-premium option at a glance.</li>
+  <li><strong>⬇ Export JSON</strong> — saves the currently open design as a <code>.json</code> file to <code>Downloads/Nextritech/SolarBESS Sizing Studio</code>. This is a complete backup of one design (not your whole saved-designs list) — email it, back it up, or hand it to another installer using the App.</li>
+  <li><strong>⬆ Import JSON</strong> — loads a <code>.json</code> file exported this way (by you, or by anyone else running the App) straight into the App as the active design, ready to review, adjust, or re-export.</li>
+  <li><strong>⬇ BOQ CSV</strong> — exports just the current Bill of Quantities as a spreadsheet-ready <code>.csv</code> file, useful for pasting into your own quoting/accounting tools outside the App.</li>
+  </ul>
+  <div class="tip"><b>Tip:</b> Export JSON/Import JSON is the reliable way to move a specific design between your phone and a colleague's, or to keep an off-device backup before uninstalling — Saved Designs live only on the device that saved them, they don't sync to your account automatically.</div></section>
+
+  <section class="clause" id="m-pricing"><h2>The "Pricing" Section — Custom Items &amp; Bulk Import Templates</h2>
+  <p>The <strong>⚙ Pricing</strong> button in the header opens Pricing Settings — this is where you make the App's equipment catalogue and cost assumptions match what you actually pay locally, separately from editing one specific BOQ's line items.</p>
+  <ul>
+  <li><strong>Built-in price list</strong> — every catalogue item (grouped by category) shown with an editable price field. Edits are saved <em>per market</em>, so a price you correct for one country doesn't change another. Items tagged <strong>USD-based</strong> are converted from a USD reference price (no established local price yet) — worth adjusting to your real local cost.</li>
+  <li><strong>FX / Global Price Adjustment Multiplier</strong> — one number applied on top of every base price (e.g. 1.05 for +5%) — a fast way to account for inflation or a currency move without editing every line individually.</li>
+  <li><strong>Specify Custom Inverter</strong> — overrides the design engine's automatic inverter selection with one exact model's real specs (MPPT channels, max DC input, max MPPT voltage, cost) — use this when you already know exactly which inverter you're installing.</li>
+  <li><strong>➕ Add Item to Price List</strong> — add one custom item by hand: name, brand, category, unit, price, and — for panels/inverters/batteries specifically — the real engineering specs (e.g. Voc/Isc/Vmp for a panel) that the sizing engine uses directly. Leave the "Override key" field blank to add it as a new item, or fill in an existing item's internal key (e.g. <code>cab_4mm_dc</code>) to replace that built-in default instead of duplicating it.</li>
+  <li><strong>📋 Bulk Import (CSV)</strong> — the faster way to add many items at once, for four categories: <strong>Panels</strong>, <strong>Inverters</strong>, <strong>Batteries</strong>, and <strong>BOQ Items</strong> (everything else — cables, breakers, mounting, earthing, etc.). For each category: tap <strong>⬇ Template</strong> to download a ready-made <code>.csv</code> with the correct columns (and, for BOQ Items, pre-filled with the App's own baseline items so you can just edit prices instead of starting blank); fill it in using a spreadsheet app (or edit the downloaded file directly); then tap <strong>⬆ Upload</strong> and select your filled-in file. Each file is validated against its own "equipment_group" column, not its filename — so an accidentally mixed-up or mislabeled file is caught and reported by name, not silently misfiled.</li>
+  </ul>
+  <p>Whatever you add — one item at a time or via Bulk Import — becomes available to the sizing engine through the <strong>Equipment Source</strong> setting on the Design Preferences tab (Step 4): set it to "My Equipment" or "Both" to have Auto-Select and Browse actually draw from your own uploaded list, not just the built-in catalogue.</p>
+  <div class="tip"><b>Tip:</b> download the templates even if you plan to type entries by hand first — the column headers and units they use are exactly what the App expects on re-import, so starting from the template avoids format mismatches.</div></section>
+
+  <section class="clause" id="m-features"><h2>Other Features</h2></section>
+  <div class="feat-grid">
+  <div class="feat"><h3>Multi-language</h3><p>Switch the whole interface — including printed reports and this manual — between English, Spanish, Portuguese, and French from the header at any time.</p></div>
+  <div class="feat"><h3>Multi-market</h3><p>Kenya, USA, Brazil, Mexico, and more — each with its own currency, VAT treatment, net-metering caps, and regulatory notes.</p></div>
+  </div>
+
+  <section class="clause" id="m-gloss1"><h2>Glossary: Solar &amp; Battery Basics</h2>
+  <p>Plain-language explanations of the equipment behind every design — useful if you're presenting a proposal to a client who isn't an engineer.</p></section>
+  <div class="feat-grid">
+  <div class="feat"><h3>Solar PV Array</h3><p>The full set of solar panels working together. Each panel turns sunlight directly into electricity ("PV" = photovoltaic, literally "light-to-electricity"). Its size is measured in <strong>kWp</strong> — the maximum it can produce under perfect sun.</p></div>
+  <div class="feat"><h3>Inverter</h3><p>Converts the DC electricity from the panels and battery into the AC electricity that home and business appliances actually use. In a hybrid or grid-tied system it also manages the flow of power between solar, battery, and the grid.</p></div>
+  <div class="feat"><h3>Battery Bank</h3><p>A group of batteries wired together to store electricity for later — to power critical loads during an outage, or to save surplus solar for use after sunset. Sized in <strong>kWh</strong> — how much energy it can hold.</p></div>
+  <div class="feat"><h3>Charge Controller (MPPT)</h3><p>Sits between the panels and the battery, regulating how much current flows in — protects the battery from overcharging while squeezing the most possible power out of the panels. Often built into the inverter rather than a separate box.</p></div>
+  <div class="feat"><h3>System Configurations</h3><p><strong>Hybrid</strong>: solar + battery + grid, most flexible. <strong>Off-Grid</strong>: solar + battery only, no utility connection. <strong>Grid-Tied</strong>: solar + grid, no battery — cheapest, but no power during an outage. <strong>BESS Only</strong>: battery + grid, no panels — pure backup/UPS.</p></div>
+  <div class="feat"><h3>kWp vs kW</h3><p><strong>kWp</strong> (kilowatt-peak) is a solar panel's maximum rated output in ideal lab conditions — always used for the array itself. <strong>kW</strong> is real-world running power — used for the inverter, the loads, and everything the array actually delivers.</p></div>
+  <div class="feat"><h3>AC vs DC</h3><p><strong>DC</strong> (Direct Current) is what solar panels and batteries produce and store. <strong>AC</strong> (Alternating Current) is what the grid and virtually every appliance actually run on. The inverter is what converts one into the other.</p></div>
+  </div>
+
+  <section class="clause" id="m-gloss2"><h2>Glossary: Design Parameters Explained</h2></section>
+  <div class="feat-grid">
+  <div class="feat"><h3>Autonomy Days</h3><p>How many full days the battery bank should power the critical loads with zero solar input — cloudy days in a row, or an extended outage in an off-grid/BESS system.</p></div>
+  <div class="feat"><h3>Depth of Discharge (DoD)</h3><p>How much of a battery's total capacity is safe to actually use before recharging. 80% DoD on a 10kWh battery means ~8kWh usable — the rest stays in reserve to protect the battery's lifespan. LFP tolerates a much deeper DoD (80-90%) than older lead-acid/GEL (50%).</p></div>
+  <div class="feat"><h3>Battery / Inverter Efficiency</h3><p>The percentage of energy that actually makes it through the equipment, versus lost as heat during conversion. 95% battery efficiency means 5% of stored energy is lost round-trip.</p></div>
+  <div class="feat"><h3>Panel Derating Factor</h3><p>A safety discount on a panel's rated output for real-world losses — heat, dust/soiling, slight mismatches between panels — that a datasheet's "perfect lab conditions" number doesn't include.</p></div>
+  <div class="feat"><h3>System Expansion Margin</h3><p>Extra capacity built into the design now, so the client can add more appliances later without a full re-size.</p></div>
+  <div class="feat"><h3>Battery Chemistry</h3><p><strong>LFP</strong> (Lithium Iron Phosphate) is the modern standard: long life, deep discharge, no maintenance. <strong>GEL/lead-acid</strong> is older, cheaper upfront, but shorter life and shallower usable discharge.</p></div>
+  <div class="feat"><h3>Sizing Basis (Today vs Future)</h3><p>Whether a component is sized for the client's current measured load ("Today" — cheaper, tightest fit) or for load projected years out after growth ("Future" — more headroom, higher upfront cost).</p></div>
+  <div class="feat"><h3>Battery Voltage / Unit Size Preference</h3><p>The nominal DC voltage the bank is built around (typically 48V beyond a small system), and whether the specific battery product is picked automatically, browsed from real available products, or entered by hand.</p></div>
+  <div class="feat"><h3>Inverter Strategy</h3><p>Whether the design uses one inverter, several identical units in parallel (for loads bigger than one unit handles), or lets the engine decide automatically.</p></div>
+  <div class="feat"><h3>Load Diversity Factor</h3><p>The realistic percentage of all listed appliances actually running at the exact same moment — very few sites run 100% of their equipment simultaneously, so this avoids over-sizing for a scenario that never happens.</p></div>
+  <div class="feat"><h3>Future Load Growth / Design Horizon</h3><p>The assumed annual percentage growth in the client's power demand, and how many years that growth is projected — feeds directly into the "Future" sizing basis above.</p></div>
+  </div>
+
+  <section class="clause" id="m-gloss3"><h2>Glossary: Electricity Tariff Terms</h2></section>
+  <div class="feat-grid">
+  <div class="feat"><h3>Electricity Tariff</h3><p>The price the client currently pays the utility per kWh of grid electricity — the baseline every solar-savings calculation is measured against.</p></div>
+  <div class="feat"><h3>Tariff Escalation Rate</h3><p>The assumed annual percentage increase in that utility price over time — since rates historically tend to rise, this makes later years' savings realistically larger than year one's.</p></div>
+  <div class="feat"><h3>Feed-In / Export Tariff</h3><p>The rate the utility pays (or credits) for surplus solar electricity sent back to the grid, in a grid-tied or hybrid system that can export.</p></div>
+  <div class="feat"><h3>Self-Consumption Ratio</h3><p>The percentage of solar electricity generated that the client actually uses on-site, versus exporting. Matters whenever import and export rates differ — using your own solar is usually worth more than exporting it.</p></div>
+  </div>
+
+  <section class="clause" id="m-gloss4"><h2>Glossary: Investment &amp; Financial Terms</h2></section>
+  <div class="feat-grid">
+  <div class="feat"><h3>CapEx</h3><p>Capital Expenditure — the total upfront cost to install the complete system: equipment, labor, and design fee combined, before any financing.</p></div>
+  <div class="feat"><h3>O&amp;M Cost</h3><p>Operations &amp; Maintenance — the ongoing annual cost to keep the system running (panel cleaning, inspections, inverter servicing), as a percentage of the system's value per year.</p></div>
+  <div class="feat"><h3>Overall Margin</h3><p>The markup applied on top of raw equipment/material cost to reach the client-facing sell price — covers business overhead and profit.</p></div>
+  <div class="feat"><h3>VAT Rate</h3><p>Value-Added Tax, added per the selected market's rules — some markets exempt solar equipment from VAT entirely.</p></div>
+  <div class="feat"><h3>Discount Rate (WACC)</h3><p>Weighted Average Cost of Capital — what a unit of money today is really "worth" compared to that same amount years from now (inflation, opportunity cost, cost of borrowing). Used to fairly compare savings in year 20 against money spent today.</p></div>
+  <div class="feat"><h3>Simple Payback</h3><p>How many years of electricity-bill savings it takes to recover the system's upfront cost — the simplest, most intuitive return metric, but it ignores the time-value of money.</p></div>
+  <div class="feat"><h3>NPV (Net Present Value)</h3><p>The total 25-year savings the system generates, each year discounted back to what it's actually worth in today's money using the WACC above. A positive NPV means the investment is worth more than its cost, in today's-money terms.</p></div>
+  <div class="feat"><h3>IRR (Internal Rate of Return)</h3><p>The effective annual "interest rate" the investment earns, as a percentage — lets you compare a solar investment directly against other opportunities (a savings account, the stock market) on the same footing.</p></div>
+  <div class="feat"><h3>CO₂ Offset</h3><p>The estimated annual reduction in carbon emissions from generating electricity with solar instead of the grid's typical fuel mix — often expressed as an equivalent number of trees planted, for an intuitive comparison.</p></div>
+  </div>
+
+  <section class="clause" id="m-trouble"><h2>Troubleshooting</h2>
+  <ul><li><strong>An export button says my free export was already used.</strong> Each of the 6 export buttons on the Export tab has its own 3-use trial allowance — subscribing unlocks unlimited exports for all of them.</li>
+  <li><strong>Battery autonomy looks off.</strong> Check which loads are marked Critical on the Loads tab — autonomy is calculated against critical load only, not total load.</li>
+  <li><strong>NPV seems much lower than 25 years of savings added up.</strong> That's discounting, not an error — see the Financials tab above.</li>
+  <li><strong>Equipment prices, regulatory notes, or a market/country I expect isn't showing up correctly.</strong> Market and equipment data refresh in the background while you're signed in and online. Fully close the App (not just switch away from it) and reopen it to force a fresh sync.</li>
+  <li><strong>A CSV Bulk Import is rejected.</strong> Start from the downloaded Template for that category rather than a hand-built file — the column headers and the "equipment_group" column need to match exactly what the App expects.</li></ul></section>
+
+  <div class="foot-note">This manual is updated alongside the App. Also viewable in-app anytime via the Documents tab, in English, Spanish, Portuguese, and French — see the <a href="terms-conditions.html">Terms &amp; Conditions</a> and <a href="privacy-policy.html">Privacy Policy</a>.</div>
+</main>
+<footer><span>Nextritech Ltd — SolarBESS Sizing Studio</span><span>Nairobi, Kenya</span></footer>
+</body>
+</html>
