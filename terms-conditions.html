@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions — SolarBESS Sizing Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4; --surface:#ffffff; --card:#f8f6f1; --border:#e5ddd0;
+  --ink:#1e1a14; --ink-dim:#6b6255; --ink-faint:#9a8f7d;
+  --accent:#b8720f; --accent-soft:#fdf1de; --accent-border:#eecd9a;
+  --warn:#9a4a12; --warn-soft:#fdeee0; --warn-border:#f0c194;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0a0f1e; --surface:#131929; --card:#1a2236; --border:#243050;
+    --ink:#e2e8f0; --ink-dim:#94a3b8; --ink-faint:#64748b;
+    --accent:#f5a623; --accent-soft:rgba(245,166,35,0.12); --accent-border:rgba(245,166,35,0.35);
+    --warn:#f5a623; --warn-soft:rgba(245,166,35,0.1); --warn-border:rgba(245,166,35,0.3);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;}
+a{color:var(--accent);text-decoration-thickness:1px;}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10;}
+.brand{display:flex;align-items:center;gap:9px;}
+.brand-mark{width:24px;height:24px;flex-shrink:0;}
+.brand-name{font-family:'Syne',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:-0.2px;}
+.brand-name span{color:var(--accent);}
+.doc-pill{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--border);border-radius:100px;padding:4px 10px;}
+main{max-width:700px;margin:0 auto;padding:48px 24px 100px;}
+.doc-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.7rem,5vw,2.3rem);letter-spacing:-0.5px;margin:0 0 12px;text-wrap:balance;}
+.sub{color:var(--ink-dim);font-size:0.98rem;line-height:1.65;margin:0 0 20px;max-width:56ch;}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-family:'DM Mono',monospace;font-size:0.74rem;color:var(--ink-faint);margin-bottom:36px;padding-bottom:26px;border-bottom:1px solid var(--border);}
+.meta b{color:var(--ink-dim);font-weight:500;}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:40px;}
+.toc-label{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
+.toc ol{margin:0;padding:0 0 0 1.3em;columns:2;column-gap:20px;}
+.toc li{font-size:0.84rem;line-height:1.9;}
+.toc a{color:var(--ink-dim);text-decoration:none;}
+.toc a:hover{color:var(--accent);}
+section{margin-bottom:34px;scroll-margin-top:70px;}
+h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.12rem;letter-spacing:-0.2px;display:flex;gap:10px;align-items:baseline;margin:0 0 12px;}
+h2 .num{font-family:'DM Mono',monospace;font-size:0.84rem;font-weight:500;color:var(--accent);flex-shrink:0;}
+p{line-height:1.75;font-size:0.94rem;margin:0 0 13px;}
+p.dim{color:var(--ink-dim);}
+ul{padding-left:1.3em;line-height:1.75;font-size:0.94rem;margin:0 0 13px;}
+li{margin-bottom:7px;}
+strong{color:var(--ink);font-weight:700;}
+.prominent{background:var(--warn-soft);border:1px solid var(--warn-border);border-radius:12px;padding:16px 18px;margin:0 0 16px;}
+.prominent p{margin:0;font-weight:600;color:var(--warn);line-height:1.65;}
+.foot-note{margin-top:44px;padding:16px 18px;background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:12px;font-size:0.82rem;color:var(--ink-dim);line-height:1.65;}
+footer{max-width:700px;margin:0 auto;padding:0 24px 56px;font-size:0.78rem;color:var(--ink-faint);line-height:1.6;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+@media (max-width:520px){ .toc ol{columns:1;} .meta{gap:10px 18px;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    <div class="brand-name">SolarBESS <span>Sizing Studio</span></div>
+  </div>
+  <div class="doc-pill">Legal · Terms</div>
+</div>
+
+<main>
+  <div class="doc-eyebrow">Legal</div>
+  <h1>Terms &amp; Conditions of Use</h1>
+  <p class="sub">SolarBESS Sizing Studio is provided by Nextritech Ltd. By using the App you agree to these Terms.</p>
+  <div class="meta"><span><b>Effective</b> 2026-09-01</span><span><b>Entity</b> Nextritech Ltd</span><span><b>Jurisdiction</b> Kenya</span></div>
+
+  <div class="toc">
+    <div class="toc-label">On this page</div>
+    <ol>
+      <li><a href="#t-1">Acceptance of Terms</a></li>
+      <li><a href="#t-2">Description of Service</a></li>
+      <li><a href="#t-3">Not a Substitute for Engineering Judgment</a></li>
+      <li><a href="#t-4">Accounts &amp; Eligibility</a></li>
+      <li><a href="#t-5">Subscriptions &amp; Billing</a></li>
+      <li><a href="#t-6">Your Responsibilities</a></li>
+      <li><a href="#t-7">Intellectual Property</a></li>
+      <li><a href="#t-8">Disclaimer of Warranties</a></li>
+      <li><a href="#t-9">Limitation of Liability</a></li>
+      <li><a href="#t-10">Indemnification</a></li>
+      <li><a href="#t-11">Data &amp; Privacy</a></li>
+      <li><a href="#t-12">Termination</a></li>
+      <li><a href="#t-13">Changes to These Terms</a></li>
+      <li><a href="#t-14">Governing Law &amp; Disputes</a></li>
+      <li><a href="#t-15">Contact</a></li>
+    </ol>
+  </div>
+
+  <section id="t-1">
+    <h2><span class="num">1.</span> Acceptance of Terms</h2>
+    <p>By creating an account, signing in, or otherwise using SolarBESS Sizing Studio (the "App"), you agree to be bound by these Terms &amp; Conditions ("Terms"). If you do not agree, do not use the App. If you are using the App on behalf of a company or other legal entity, you represent that you have authority to bind that entity, and "you" refers to both you and that entity.</p>
+  </section>
+
+  <section id="t-2">
+    <h2><span class="num">2.</span> Description of Service</h2>
+    <p>The App is a solar hybrid power system sizing and cost-estimation tool. Based on inputs you provide (appliance loads, site conditions, market/region, design preferences), it produces indicative system designs, bills of quantities, and financial projections. Outputs are estimates for planning purposes and depend entirely on the accuracy of the inputs you supply and the assumptions built into the App's calculation engine.</p>
+  </section>
+
+  <section id="t-3">
+    <h2><span class="num">3.</span> Not a Substitute for Professional Engineering Judgment</h2>
+    <div class="prominent"><p>THE APP DOES NOT REPLACE THE JUDGMENT OF A QUALIFIED, LICENSED ELECTRICAL OR SOLAR ENGINEER. ITS OUTPUTS ARE NOT A CERTIFIED ENGINEERING DESIGN, A CONSTRUCTION DOCUMENT, OR A SUBSTITUTE FOR REGULATORY APPROVAL. THE APP IS A PLANNING AND ESTIMATION TOOL ONLY — IT IS NOT A PRIMARY SAFETY OR ENGINEERING RESOURCE, AND MUST NOT BE TREATED AS ONE.</p></div>
+    <p>Before any design produced by the App is used for procurement, installation, or grid interconnection:</p>
+    <ul>
+      <li>it must be independently reviewed and, where required by local law, stamped or approved by a licensed engineer;</li>
+      <li>it must be verified against a site survey, the applicable electrical code, and utility/regulator requirements in the relevant jurisdiction;</li>
+      <li>all equipment selections, cable sizing, and protection ratings must be confirmed by the installer as fit for the specific site.</li>
+    </ul>
+    <p>You are solely responsible for any decision to install, sell, or represent a design produced by the App without this independent verification.</p>
+  </section>
+
+  <section id="t-4">
+    <h2><span class="num">4.</span> Accounts &amp; Eligibility</h2>
+    <p>You must sign in with a valid Google account to use the App. You are responsible for maintaining the confidentiality of your account and for all activity that occurs under it. You must be old enough to form a binding contract in your jurisdiction, or have a parent/guardian's consent.</p>
+    <p>You may request deletion of your account and associated data at any time, either <strong>in-app</strong> (tap ⚙ next to your name → Delete My Account) or, if you no longer have the App installed, at <a href="https://ejltimmzynxncvnfgits.supabase.co/functions/v1/account-deletion-request">our account deletion page</a>. If your account simply becomes inactive without an explicit request, it is deleted automatically 15 days after your subscription or trial expires. See Privacy Policy §5 for what deletion removes.</p>
+  </section>
+
+  <section id="t-5">
+    <h2><span class="num">5.</span> Subscriptions &amp; Billing</h2>
+    <p>The App offers a free 3-day trial period — full design access, plus up to 3 exports of each report action (Technical Proposal, BOQ, Financial Report — print or save). After the trial, continued use requires an active paid subscription (monthly or annual, as shown in the App at checkout). All subscriptions are sold, billed, and managed exclusively through Google Play — we do not process payments or store payment details ourselves.</p>
+    <p>Subscriptions renew automatically at the then-current price at the end of each billing period unless cancelled before that date. <strong>To cancel:</strong> tap ⚙ next to your name in the App → <strong>Manage Subscription</strong>, which opens Google Play directly to your subscription; or manually via the Google Play Store app → profile icon → <strong>Payments &amp; subscriptions</strong> → <strong>Subscriptions</strong> → SolarBESS Sizing Studio → <strong>Cancel subscription</strong>. Cancelling stops future renewals but does not refund the current billing period; you retain access until the period you already paid for ends. Refunds are governed entirely by Google Play's own refund policy — request them through Google Play, not through us.</p>
+  </section>
+
+  <section id="t-6">
+    <h2><span class="num">6.</span> Your Responsibilities</h2>
+    <ul>
+      <li>Provide accurate inputs — appliance loads, site conditions, and preferences you enter directly determine the App's output.</li>
+      <li>Comply with all applicable electrical codes, building regulations, and utility interconnection requirements in the jurisdiction where a design will be installed.</li>
+      <li>Not represent App output as a certified or final engineering design without the independent review described in Section 3.</li>
+      <li>Use the App only for lawful purposes and not attempt to reverse-engineer, resell, or extract its underlying calculation logic.</li>
+    </ul>
+  </section>
+
+  <section id="t-7">
+    <h2><span class="num">7.</span> Intellectual Property</h2>
+    <p>The App, including its calculation engine, design, and content, is owned by Nextritech Ltd and protected by applicable intellectual property law. You retain ownership of the project data you input (client names, load lists, site details) and may export it at any time.</p>
+  </section>
+
+  <section id="t-8">
+    <h2><span class="num">8.</span> Disclaimer of Warranties</h2>
+    <div class="prominent"><p>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. WE DO NOT WARRANT THAT OUTPUTS WILL BE ERROR-FREE, THAT PRICING OR REGULATORY DATA WILL BE CURRENT FOR YOUR MARKET, OR THAT THE APP WILL BE UNINTERRUPTED OR SECURE.</p></div>
+  </section>
+
+  <section id="t-9">
+    <h2><span class="num">9.</span> Limitation of Liability</h2>
+    <p>To the maximum extent permitted by law: neither Nextritech Ltd nor its officers, employees, or agents will be liable for any indirect, incidental, special, consequential, or punitive damages — including lost profits, lost savings, property damage, or personal injury — arising from or related to your use of the App or reliance on its output, even if advised of the possibility of such damages.</p>
+    <p>Our total aggregate liability to you for any claim arising from the App, however caused, will not exceed the amount you paid us in subscription fees in the twelve (12) months preceding the event giving rise to the claim.</p>
+    <p class="dim">This limitation does not apply where prohibited by law (e.g. gross negligence or willful misconduct, where local law does not permit their exclusion).</p>
+  </section>
+
+  <section id="t-10">
+    <h2><span class="num">10.</span> Indemnification</h2>
+    <p>You agree to indemnify and hold harmless Nextritech Ltd from any third-party claim, loss, or expense (including reasonable legal fees) arising from your use of the App, your violation of these Terms, or a design you installed or represented as final without the independent professional review required by Section 3.</p>
+  </section>
+
+  <section id="t-11">
+    <h2><span class="num">11.</span> Data &amp; Privacy</h2>
+    <p>Our collection and use of personal data (Google sign-in details, project data, subscription status) is described in our <a href="privacy-policy.html">Privacy Policy</a>. By using the App you consent to that processing.</p>
+  </section>
+
+  <section id="t-12">
+    <h2><span class="num">12.</span> Termination</h2>
+    <p>You may stop using the App and cancel your subscription at any time through Google Play. We may suspend or terminate your access if you breach these Terms, including misuse of the App or non-payment. Sections 3, 7–11, and 14 survive termination.</p>
+    <p>Terminating your account is separate from deleting it — see Section 4 to request deletion of your account and data at any time. If you simply stop using the App without requesting deletion, your account is deleted automatically 15 days after your subscription or trial expires, as described in Section 4.</p>
+  </section>
+
+  <section id="t-13">
+    <h2><span class="num">13.</span> Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. Material changes will be presented to you for re-acceptance the next time you sign in; the version and date you accepted is recorded against your account. Continued use after a non-material update constitutes acceptance.</p>
+  </section>
+
+  <section id="t-14">
+    <h2><span class="num">14.</span> Governing Law &amp; Disputes</h2>
+    <p>These Terms are governed by the laws of Kenya, without regard to conflict-of-law principles. Any dispute arising from these Terms or the App is subject to the exclusive jurisdiction of the courts of Kenya.</p>
+  </section>
+
+  <section id="t-15">
+    <h2><span class="num">15.</span> Contact</h2>
+    <p>Questions about these Terms: <a href="mailto:nextritechltd@gmail.com">nextritechltd@gmail.com</a> · LR. NO. 2951/35, Lower Kabete Road, Nairobi · P.O. Box 67587-00200, Nairobi, Kenya.</p>
+  </section>
+
+  <div class="foot-note">Also viewable in-app anytime via the Documents tab, and reflects the App's <a href="privacy-policy.html">Privacy Policy</a>.</div>
+</main>
+<footer><span>Nextritech Ltd — SolarBESS Sizing Studio</span><span>Nairobi, Kenya</span></footer>
+</body>
+</html>
